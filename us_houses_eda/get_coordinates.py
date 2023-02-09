@@ -1,4 +1,4 @@
-""" this module contains functions for getting coordinates of a place"""
+"""this module contains functions for getting coordinates of a place"""
 
 
 from geopy.geocoders import Nominatim
