@@ -8,16 +8,20 @@ GEOCODER = Nominatim(user_agent='app')
 def get_latitude(location: str) -> float:
     """get latitude of location"""
 
-    latitude = GEOCODER.geocode(location).latitude
-    if latitude is None:
-        return None
+    geocode = GEOCODER.geocode(location)
+    if geocode is None:
+        latitude = None
+    else:
+        latitude = geocode.latitude
     return latitude
 
 
 def get_longitude(location: str) -> float:
     """get longitude of location"""
 
-    longitude = GEOCODER.geocode(location).longitude
-    if longitude is None:
-        return None
+    geocode = GEOCODER.geocode(location)
+    if geocode is None:
+        longitude = None
+    else:
+        longitude = geocode.longitude
     return longitude
