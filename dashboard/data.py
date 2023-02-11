@@ -2,9 +2,11 @@
 
 import ast
 import geopandas as gpd
+from geopy.geocoders import Nominatim
 from plotly import graph_objs as go
 from plotly import express as px
-from us_houses_eda.get_coordinates import get_latitude, get_longitude
+
+geocoder = Nominatim(user_agent='app')
 
 us_houses_geo_df = gpd.read_file('../houses-data-shapefile/us-houses-shapefile.shp')
 us_states_df = gpd.read_file('../usa-states-shapefile/cb_2018_us_state_500k.shp')
@@ -25,8 +27,8 @@ def get_average_price_by_state(state: str) -> float:
 def plot_single_state_house_price(state: str) -> go.figure.Figure:
     """plots single state plot for average house price"""
 
-    lat = get_latitude(location=state)
-    long = get_longitude(location=state)
+    lat = geocoder.geocode(state).latitide
+    long = geocoder.geocode(state).longitude
 
     us_states_df['AVERAGE_HOUSE_PRICE'] = us_states_df['NAME'].apply(get_average_price_by_state)
     state_df = us_states_df[us_states_df['NAME']==state]
