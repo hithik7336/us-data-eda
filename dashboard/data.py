@@ -1,8 +1,10 @@
 """this module contains data"""
 
+import ast
 import geopandas as gpd
 from plotly import graph_objs as go
 from plotly import express as px
+from us_houses_eda.get_coordinates import get_latitude, get_longitude
 
 us_houses_geo_df = gpd.read_file('../houses-data-shapefile/us-houses-shapefile.shp')
 us_states_df = gpd.read_file('../usa-states-shapefile/cb_2018_us_state_500k.shp')
@@ -20,6 +22,21 @@ def get_average_price_by_state(state):
     return av_house_price
 
 
-def single_state_house_price(state: str) -> go.figure.Figure:
+def plot_single_state_house_price(state: str) -> go.figure.Figure:
     """plots single state plot for average house price"""
-    
+
+    lat = get_latitude(location=state)
+    long = get_longitude(location=state)
+
+    us_states_df['AVERAGE_HOUSE_PRICE'] = us_states_df['NAME'].apply(get_average_price_by_state)
+    state_df = us_states_df[us_states_df['NAME']==state]
+    geojson = ast.literal_eval(state_df[['GEOID', 'geometry']].to_json())
+
+    fig = px.choropleth_mapbox(state_df, geojson=geojson, color="AVERAGE_HOUSE_PRICE",
+                               locations="GEOID", featureidkey="properties.GEOID",
+                               center={"lat": lat, "lon": long},
+                               mapbox_style="carto-positron", zoom=9)
+
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+
+    return fig
