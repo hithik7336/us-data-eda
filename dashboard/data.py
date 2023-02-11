@@ -9,7 +9,7 @@ from us_houses_eda.get_coordinates import get_latitude, get_longitude
 us_houses_geo_df = gpd.read_file('../houses-data-shapefile/us-houses-shapefile.shp')
 us_states_df = gpd.read_file('../usa-states-shapefile/cb_2018_us_state_500k.shp')
 
-def get_average_price_by_state(state):
+def get_average_price_by_state(state: str) -> float:
     """getting average house price in each state"""
 
     by_state = us_houses_geo_df.groupby('state')
