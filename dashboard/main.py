@@ -10,10 +10,16 @@ app = dash.Dash()
 
 app.layout = html.Div(id='outer-div', children=[html.H1('U.S.A Houses Dashboard', style=DASBOARD_TOPIC_DICT),
 
-                                                html.Div(id='left-div', children=[dcc.Dropdown(), html.Hr(), dcc.Dropdown()],
+                                                html.Div(id='left-div', children=[dcc.Dropdown(), html.Hr(), 
+                                                                                  dcc.Dropdown(),
+                                                                                  dcc.Graph(),
+                                                                                  dcc.Graph()],
                                                          style=LEFT_DIV_STYLE),
 
-                                                html.Div(id='right-div', children=[dcc.Dropdown(), html.Hr(), dcc.Dropdown()],
+                                                html.Div(id='right-div', children=[dcc.Dropdown(), html.Hr(), 
+                                                                                   dcc.Dropdown(),
+                                                                                   dcc.Graph(),
+                                                                                   dcc.Graph()],
                                                          style=RIGHT_DIV_STYLE)])
 
 
