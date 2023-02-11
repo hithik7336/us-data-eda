@@ -6,8 +6,8 @@ DASBOARD_TOPIC_DICT = {'text-align': 'center', 'color': 'rgb(34, 106, 12)', 'fon
                        'text-decoration': 'underline'}
 
 LEFT_DIV_STYLE = {'border': 'Solid 5px Black', 'float': 'left', 'padding': '5px',
-                  'width': '49%', 'height': '99%'}
+                  'width': '48%', 'height': '99%'}
 RIGHT_DIV_STYLE = {'border': 'Solid 5px Black', 'float': 'right', 'padding': '5px',
-                   'width': '49%', 'height': '99%'}
+                   'width': '48%', 'height': '99%'}
 
 GRAPH_STYLE = {'border': 'Solid 5px Black', 'border-radius': '3px'}
