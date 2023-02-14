@@ -3,7 +3,6 @@
 import ast
 import geopandas as gpd
 from geopy.geocoders import Nominatim
-from plotly import graph_objs as go
 from plotly import express as px
 
 geocoder = Nominatim(user_agent='app')
@@ -36,7 +35,8 @@ def plot_single_state_house_price(state: str):
 
     fig = px.choropleth_mapbox(state_df, geojson=geojson, color="AVERAGE_HOUSE_PRICE",
                                locations="GEOID", featureidkey="properties.GEOID",
-                               center={"lat": lat, "lon": long}, hover_data=['NAME', 'AVERAGE_HOUSE_PRICE'],
+                               center={"lat": lat, "lon": long},
+                               hover_data=['NAME', 'AVERAGE_HOUSE_PRICE'],
                                mapbox_style="carto-positron", zoom=5)
 
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
