@@ -24,10 +24,10 @@ def get_average_price_by_state(state: str) -> float:
     return av_house_price
 
 
-def plot_single_state_house_price(state: str) -> go.figure.Figure:
+def plot_single_state_house_price(state: str):
     """plots single state plot for average house price"""
 
-    lat = geocoder.geocode(state).latitide
+    lat = geocoder.geocode(state).latitude
     long = geocoder.geocode(state).longitude
 
     us_states_df['AVERAGE_HOUSE_PRICE'] = us_states_df['NAME'].apply(get_average_price_by_state)
@@ -36,9 +36,10 @@ def plot_single_state_house_price(state: str) -> go.figure.Figure:
 
     fig = px.choropleth_mapbox(state_df, geojson=geojson, color="AVERAGE_HOUSE_PRICE",
                                locations="GEOID", featureidkey="properties.GEOID",
-                               center={"lat": lat, "lon": long},
-                               mapbox_style="carto-positron", zoom=9)
+                               center={"lat": lat, "lon": long}, hover_data=['NAME', 'AVERAGE_HOUSE_PRICE'],
+                               mapbox_style="carto-positron", zoom=5)
 
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    fig.update_layout(coloraxis_showscale=False)
 
     return fig
