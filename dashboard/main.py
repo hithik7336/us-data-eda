@@ -3,8 +3,9 @@
 import dash
 import dash_html_components as html
 import dash_core_components as dcc
+from dash.dependencies import Input, Output
+from data import plot_single_state_house_price
 
-from data import get_average_price_by_state
 
 from style_dicts import DASBOARD_TOPIC_DICT, LEFT_DIV_STYLE, RIGHT_DIV_STYLE, GRAPH_STYLE
 
@@ -36,6 +37,7 @@ app.layout = html.Div(id='outer-div', children=[html.H1('U.S.A Houses Dashboard'
                                                                     dcc.Graph(id='graph-4',
                                                                               style=GRAPH_STYLE)],
                                                          style=RIGHT_DIV_STYLE)])
+
 
 if __name__ == "__main__":
     app.run_server(debug=True)
